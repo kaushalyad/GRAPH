@@ -1,0 +1,71 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std ;
+int Node[100000] ;
+int Rank[100000]={0} ;
+int find(int a){
+  if(a==Node[a]) return a ;
+
+  return Node[a]=find(Node[a]) ;
+
+}
+void Union(int a,int b){
+ int c = find(a) ;
+ int d = find(b) ;
+ if(Rank[c]<Rank[d]){
+   Node[c]=d ;
+ }
+
+ else if(Rank[c]>Rank[d]){
+    Node[d]=c ;
+ }
+
+ else{
+   Node[d] = c ;
+   Rank[c]++ ;
+ }
+
+}
+int main(){
+
+  //make(int a)-->this function is used to make node 
+  //find(int a)--> this function return parent node of node
+  //union(int a,int b)--> this function joint two subset optimally 
+  
+  for(int i=0;i<10;i++){
+    Node[i]=i ;
+  }
+
+  
+ Union(0,1) ;
+ Union(3,5) ;
+ Union(5,1)  ;
+ Union(2,3)  ;
+ Union(3,8) ;
+ Union(0,3) ;
+ Union(5,6) ;
+ Union(8,9)  ;
+ Union(2,7) ;
+ Union(1,9)  ;
+ 
+
+cout<<find(0)<<endl ;
+cout<<find(1)<<endl ;
+cout<<Rank[0]<<endl ;
+cout<<Rank[1]<<endl ;
+
+cout<<find(5)<<endl ;
+cout<<find(3)<<endl ;
+
+cout<<Rank[3]<<endl ;
+cout<<Rank[5]<<endl ;
+ 
+
+
+
+
+
+
+
+    return 0;
+}
